@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" name-as-sort-order="all" sort-separator=" " demote-non-dropping-particle="never" initialize-with=" " initialize-with-hyphen="false" page-range-format="expanded" default-locale="zh-CN">
+  <info>
+    <title>重庆大学计算机学院（顺序编码）</title>
+    <id>http://www.zotero.org/styles/custom-chinese-reference-style</id>
+    <link href="http://www.zotero.org/styles/custom-chinese-reference-style" rel="self"/>
+	<link href="http://www.zotero.org/styles/gb-t-7714-2015-numeric-bilingual-no-url-doi" rel="template"/>
+    <updated>2025-03-14T00:00:00+00:00</updated>
+    <author>
+      <name>Hanwei Li</name>
+      <email>lhw@stu.cqu.edu.cn</email>
+    </author>
+	<category citation-format="numeric"/>
+    <category field="generic-base"/>
+    <summary>重庆大学博士、硕士学位论文格式标准（2023年修订）</summary>
+  </info>
+  <locale xml:lang="zh">
+    <date form="text">
+      <date-part name="year" suffix="年" range-delimiter="&#8212;"/>
+      <date-part name="month" form="numeric" suffix="月" range-delimiter="&#8212;"/>
+      <date-part name="day" suffix="日" range-delimiter="&#8212;"/>
+    </date>
+    <terms>
+      <term name="edition" form="short">版</term>
+      <term name="open-quote">“</term>
+      <term name="close-quote">”</term>
+      <term name="open-inner-quote">‘</term>
+      <term name="close-inner-quote">’</term>
+    </terms>
+  </locale>
+  <locale>
+    <date form="numeric">
+      <date-part name="year" range-delimiter="/"/>
+      <date-part name="month" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
+      <date-part name="day" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
+    </date>
+    <terms>
+      <term name="citation-range-delimiter">-</term>
+      <term name="page-range-delimiter">-</term>
+    </terms>
+  </locale>
+
+  <!-- 作者宏：输出作者姓名，多个作者间用逗号分隔 -->
+  <macro name="author">
+    <names variable="author">
+      <name>
+        <name-part name="family" text-case="uppercase"/>
+      </name>
+      <institution/>
+      <substitute>
+        <names variable="composer"/>
+        <names variable="illustrator"/>
+        <names variable="director"/>
+        <choose>
+          <if variable="container-title" match="none">
+            <names variable="editor"/>
+          </if>
+        </choose>
+      </substitute>
+    </names>
+  </macro>
+
+  <!-- 期刊论文：标题后添加 [J]，后续输出期刊名、年份、卷号(期号)与页码 -->
+  <macro name="article-journal">
+    <group delimiter="">
+      <text variable="title" suffix="[J]. "/>
+      <text variable="container-title" suffix=", "/>
+      <date variable="issued" form="text" date-parts="year" suffix=", "/>
+      <text variable="volume"/>
+      <choose>
+        <if variable="issue">
+          <text variable="issue" prefix=" (" suffix=")"/>
+        </if>
+      </choose>
+      <text variable="page" prefix=": " suffix="．"/>
+    </group>
+  </macro>
+
+  <!-- 会议论文：标题后添加 [C]，后续输出会议论文集名、出版地、出版者、出版年与页码 -->
+  <macro name="paper-conference">
+    <group delimiter="">
+      <text variable="title" suffix="[C], "/>
+      <text variable="container-title" suffix=". "/>
+      <text variable="publisher-place" suffix=": "/>
+      <text variable="publisher" suffix=", "/>
+      <date variable="issued" form="text" date-parts="year" suffix=": "/>
+      <text variable="page" suffix="．"/>
+    </group>
+  </macro>
+
+  <!-- 专著：标题后添加 [M]，后续输出出版地、出版者与出版年 -->
+  <macro name="book">
+    <group delimiter="">
+      <text variable="title" suffix="[M]. "/>
+      <text variable="publisher-place" suffix=": "/>
+      <text variable="publisher" suffix=", "/>
+      <date variable="issued" form="text" date-parts="year" suffix="．"/>
+    </group>
+  </macro>
+
+  <!-- 学位论文：标题后添加 [D]，后续输出学校名称与年份
+       其中学校名称优先使用 publisher 字段，如无则采用 institution -->
+  <macro name="thesis">
+    <group delimiter="">
+      <text variable="title" suffix="[D]. "/>
+      <text variable="publisher" substitute="institution" suffix=", "/>
+      <date variable="issued" form="text" date-parts="year" suffix="."/>
+    </group>
+  </macro>
+
+  <!-- 网络资料：标题后添加 [EB/OL]，后续输出网址及发表或更新日期 -->
+  <macro name="webpage">
+    <group delimiter="">
+      <text variable="title" suffix="[EB/OL]. "/>
+      <text variable="URL" suffix=", "/>
+      <choose>
+        <if variable="issued">
+          <date variable="issued" form="numeric"/>
+        </if>
+        <else>
+          <date variable="accessed" form="numeric"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="entry-layout">
+    <group delimiter=". ">
+		<text macro="author"/>
+		<choose>
+        <if type="article-journal">
+          <text macro="article-journal"/>
+        </if>
+        <else-if type="paper-conference">
+          <text macro="paper-conference"/>
+        </else-if>
+        <else-if type="book">
+          <text macro="book"/>
+        </else-if>
+        <else-if type="thesis">
+          <text macro="thesis"/>
+        </else-if>
+        <else-if type="webpage">
+          <text macro="webpage"/>
+        </else-if>
+        <else>
+          <text variable="title"/>
+        </else>
+      </choose>
+	</group>
+  </macro>
+  <citation collapse="citation-number" after-collapse-delimiter=",">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout vertical-align="sup" delimiter="," prefix="[" suffix="]">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <!-- 参考文献列表格式 -->
+  <bibliography entry-spacing="0" et-al-min="4" et-al-use-first="3" second-field-align="flush">
+    <layout locale="en">
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <text macro="entry-layout" suffix="."/>
+    </layout>
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <text macro="entry-layout" suffix="."/>
+    </layout>
+  </bibliography>
+</style>
