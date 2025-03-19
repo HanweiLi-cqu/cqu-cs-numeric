@@ -69,7 +69,7 @@
       <text variable="volume"/>
       <choose>
         <if variable="issue">
-          <text variable="issue" prefix=" (" suffix=")"/>
+          <text variable="issue" prefix="(" suffix=")"/>
         </if>
       </choose>
       <text variable="page" prefix=": "/>
