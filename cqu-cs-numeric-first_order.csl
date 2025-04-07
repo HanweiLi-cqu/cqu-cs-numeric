@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" name-as-sort-order="all" sort-separator=" " demote-non-dropping-particle="never" initialize-with=" " initialize-with-hyphen="false" page-range-format="expanded" default-locale="zh-CN">
   <info>
-    <title>重庆大学计算机学院（顺序编码）</title>
-    <id>cqu-cs</id>
+    <title>重庆大学计算机学院（顺序编码，名在前，首字母大写）</title>
+    <id>cqu-cs-first-order</id>
     <link href="http://www.zotero.org/styles/custom-chinese-reference-style" rel="self"/>
 	<link href="http://www.zotero.org/styles/gb-t-7714-2015-numeric-bilingual-no-url-doi" rel="template"/>
     <updated>2025-03-14T00:00:00+00:00</updated>
@@ -41,24 +41,12 @@
   </locale>
 
   <!-- 作者宏：输出作者姓名，多个作者间用逗号分隔 -->
-  <macro name="author">
-    <names variable="author">
-      <name>
-        <name-part name="family" text-case="uppercase"/>
-      </name>
-      <institution/>
-      <substitute>
-        <names variable="composer"/>
-        <names variable="illustrator"/>
-        <names variable="director"/>
-        <choose>
-          <if variable="container-title" match="none">
-            <names variable="editor"/>
-          </if>
-        </choose>
-      </substitute>
-    </names>
-  </macro>
+ 	<macro name="author">
+  <names variable="author">
+    <name name-as-sort-order="false" initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+  </names>
+</macro>
+
 
   <!-- 期刊论文：标题后添加 [J]，后续输出期刊名、年份、卷号(期号)与页码 -->
   <macro name="article-journal">
